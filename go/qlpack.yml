@@ -1,0 +1,5 @@
+name: seaver/go-cores
+dependencies:
+  seaver/go-free5gc: "*"
+  # cellular/cpp-open5gs: "*"
+

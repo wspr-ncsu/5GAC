@@ -1,0 +1,10 @@
+name: seaver/cpp-open5gs
+groups: 
+  - cpp
+  # - test
+dependencies:
+  codeql/cpp-queries: "*"
+  codeql/cpp-all: "*"
+  # codeql/cpp-examples: "*"
+
+
