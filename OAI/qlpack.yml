@@ -1,5 +1,5 @@
-name: seaver/oai
+name: anonymousauthors/oai
 dependencies:
-  # cellular/go-free5gc-seaver: "*"
-  seaver/cpp-oai: "*"
+  # cellular/go-free5gc-anonymousauthors: "*"
+  anonymousauthors/cpp-oai: "*"
 

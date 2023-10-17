@@ -1,5 +1,5 @@
-name: seaver/open5gs
+name: anonymousauthors/open5gs
 dependencies:
-  # cellular/go-free5gc-seaver: "*"
-  seaver/cpp-open5gs: "*"
+  # cellular/go-free5gc-anonymousauthors: "*"
+  anonymousauthors/cpp-open5gs: "*"
 
