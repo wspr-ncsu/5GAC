@@ -12,19 +12,25 @@ This repository contains the CodeQL files to analyze the cores. 5GAC is extensib
 
 The best way to run 5GAC is by using the included Dockerfile. Specifically, run 
 ```bash
+git clone --recursive https://github.com/wspr-ncsu/5GAC.git # --recursive is important!
 docker build  ./ -t 5gac:latest && docker run -v $(pwd):/repo 5gac:latest
 ```
 
 The analysis results will be added to the json folder in this directory. Each result file name is the 5G core that was analyzed followed by the date and time the analysis was run.
 
-If you want to run 5GAC without docker, we recommend running the commands one by one as they are listed in the Dockerfile. This handles cloning the repos and any packages needed to compile and run all of the 5G cores.
+If you want to run 5GAC without docker, we recommend running the commands one by one as they are listed in the Dockerfile. This handles cloning the repos and any packages needed to compile and run all of the 5G cores as well as analyze the output.
 
 ## Output
-
+The output will be in the output folder, which shows a simple YAML format providing a least-privilege policy for all 5G cores analyzed. The union of the access tokens will give the most meaningful results. 
 
 ## Citation
 If you use 5GAC in your research, please cite our work using this bibtex entry:
 
 ```tex
-TODO
+@conference{fivegac-wisec24,
+    title = {{5GAC-Analyzer: Identifying Over-Privilege Between 5G Core Network Functions}},
+    author = {Thorn, Seaver and English, K. Virgil and Butler, Kevin R. B. and Enck, William},
+    booktitle = {{Proceedings of the 17th ACM Conference on Security and Privacy in Wireless and Mobile Networks}},
+    year = {2024}
+}
 ```

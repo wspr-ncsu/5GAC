@@ -1,4 +1,4 @@
-module github.com/swthorn/go-ast
+module github.com/wspr-ncsu/5GAC/gocode
 
 go 1.18
 

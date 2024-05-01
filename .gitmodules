@@ -1,30 +1,30 @@
 [submodule "amf"]
-	path = _code/amf
+	path = gocode/_code/amf
 	url = https://github.com/free5gc/amf.git
 [submodule "ausf"]
-	path = _code/ausf
+	path = gocode/_code/ausf
 	url = https://github.com/free5gc/ausf.git
 [submodule "n3iwf"]
-	path = _code/n3iwf
+	path = gocode/_code/n3iwf
 	url = https://github.com/free5gc/n3iwf.git
 [submodule "nrf"]
-	path = _code/nrf
+	path = gocode/_code/nrf
 	url = https://github.com/free5gc/nrf.git
 [submodule "nssf"]
-	path = _code/nssf
+	path = gocode/_code/nssf
 	url = https://github.com/free5gc/nssf.git
 [submodule "pcf"]
-	path = _code/pcf
+	path = gocode/_code/pcf
 	url = https://github.com/free5gc/pcf.git
 [submodule "smf"]
-	path = _code/smf
+	path = gocode/_code/smf
 	url = https://github.com/free5gc/smf.git
 [submodule "udm"]
-	path = _code/udm
+	path = gocode/_code/udm
 	url = https://github.com/free5gc/udm.git
 [submodule "udr"]
-	path = _code/udr
+	path = gocode/_code/udr
 	url = https://github.com/free5gc/udr.git
 [submodule "openapi"]
-	path = _code/openapi
+	path = gocode/_code/openapi
 	url = https://github.com/free5gc/openapi.git
