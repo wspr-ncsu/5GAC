@@ -1,0 +1,30 @@
+[submodule "amf"]
+	path = _code/amf
+	url = https://github.com/free5gc/amf.git
+[submodule "ausf"]
+	path = _code/ausf
+	url = https://github.com/free5gc/ausf.git
+[submodule "n3iwf"]
+	path = _code/n3iwf
+	url = https://github.com/free5gc/n3iwf.git
+[submodule "nrf"]
+	path = _code/nrf
+	url = https://github.com/free5gc/nrf.git
+[submodule "nssf"]
+	path = _code/nssf
+	url = https://github.com/free5gc/nssf.git
+[submodule "pcf"]
+	path = _code/pcf
+	url = https://github.com/free5gc/pcf.git
+[submodule "smf"]
+	path = _code/smf
+	url = https://github.com/free5gc/smf.git
+[submodule "udm"]
+	path = _code/udm
+	url = https://github.com/free5gc/udm.git
+[submodule "udr"]
+	path = _code/udr
+	url = https://github.com/free5gc/udr.git
+[submodule "openapi"]
+	path = _code/openapi
+	url = https://github.com/free5gc/openapi.git

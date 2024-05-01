@@ -1,0 +1,183 @@
+pipeline {
+    agent any
+
+	tools { go '1.19' }
+
+    stages {
+        stage('Build 5GAC') {
+            steps {
+                echo 'Building Analyzer..'
+				sh "go build -v ./Analyzer/..."
+
+				echo 'Building Instrumenter..'
+				sh "go build -v ./Instrumenter/..."
+
+				echo 'Prepare _output folder'
+				sh 'mkdir -p _output'
+
+            }
+        }
+		stage('Run Analyzer') {
+            steps {
+                echo 'Running Analyzer..'
+				dir('Analyzer') {
+					sh "go run -v ./"
+				}
+            }
+        }
+		stage('Run Instrumenter') {
+            steps {
+                echo 'Running Instrumenter..'
+				dir('Instrumenter') {
+					sh "go run -v ./"
+				}
+            }
+        }
+		stage('Build free5gc') {
+            steps {
+                echo 'Cloning free5gc NFs...'
+				dir('_output/free5gc') {
+					sh 'git clone https://github.com/free5gc/amf.git'
+					sh 'git clone https://github.com/free5gc/ausf.git'
+					sh 'git clone https://github.com/free5gc/n3iwf.git'
+					sh 'git clone https://github.com/free5gc/nrf.git'
+					sh 'git clone https://github.com/free5gc/nssf.git'
+					sh 'git clone https://github.com/free5gc/pcf.git'
+					sh 'git clone https://github.com/free5gc/smf.git'
+					sh 'git clone https://github.com/free5gc/udm.git'
+					sh 'git clone https://github.com/free5gc/udr.git'
+					sh 'git clone https://go.googlesource.com/oauth2 oauth2'
+				}
+				echo 'Vendoring and Building free5gc'
+				dir('_output/free5gc/amf') {
+					sh "go get golang.org/x/oauth2"
+					sh "go mod tidy"
+					sh "go mod vendor"
+					sh "go build -v ./..."
+				}
+				dir('_output/free5gc/ausf') {
+					sh "go get golang.org/x/oauth2"
+					sh "go mod tidy"
+					sh "go mod vendor"
+					sh "go build -v ./..."
+				}
+				dir('_output/free5gc/n3iwf') {
+					//sh "go get golang.org/x/oauth2"
+					//sh "go mod tidy"
+					sh "go mod vendor"
+					sh "go build -v ./..."
+				}
+				dir('_output/free5gc/nrf') {
+					sh "go get golang.org/x/oauth2"
+					sh "go mod tidy"
+					sh "go mod vendor"
+					sh "go build -v ./..."
+				}
+				dir('_output/free5gc/nssf') {
+					sh "go get golang.org/x/oauth2"
+					sh "go mod tidy"
+					sh "go mod vendor"
+					sh "go build -v ./..."
+				}
+				dir('_output/free5gc/pcf') {
+					sh "go get golang.org/x/oauth2"
+					sh "go mod tidy"
+					sh "go mod vendor"
+					sh "go build -v ./..."
+				}
+				dir('_output/free5gc/smf') {
+					sh "go get golang.org/x/oauth2"
+					sh "go mod tidy"
+					sh "go mod vendor"
+					sh "go build -v ./..."
+				}
+				dir('_output/free5gc/udm') {
+					sh "go get golang.org/x/oauth2"
+					sh "go mod tidy"
+					sh "go mod vendor"
+					sh "go build -v ./..."
+				}
+				dir('_output/free5gc/udr') {
+					sh "go get golang.org/x/oauth2"
+					sh "go mod tidy"
+					sh "go mod vendor"
+					sh "go build -v ./..."
+				}
+            }
+        }
+        stage('Instrumenting free5gc') {
+            steps {
+                echo 'Moving Instrumenter _output into free5gc NFs..'
+				dir('_output') {
+					sh 'cp amf ausf n3iwf nrf nssf pcf smf udm udr free5gc -rf'
+					sh 'cp openapi free5gc/amf/vendor/github.com/free5gc -rf'
+					sh 'cp openapi free5gc/ausf/vendor/github.com/free5gc -rf'
+					sh 'cp openapi free5gc/n3iwf/vendor/github.com/free5gc -rf'
+					sh 'cp openapi free5gc/nrf/vendor/github.com/free5gc -rf'
+					sh 'cp openapi free5gc/nssf/vendor/github.com/free5gc -rf'
+					sh 'cp openapi free5gc/pcf/vendor/github.com/free5gc -rf'
+					sh 'cp openapi free5gc/smf/vendor/github.com/free5gc -rf'
+					sh 'cp openapi free5gc/udm/vendor/github.com/free5gc -rf'
+					sh 'cp openapi free5gc/udr/vendor/github.com/free5gc -rf'
+				}
+				dir('_output/free5gc') {
+					sh 'cp oauth2/clientcredentials amf/vendor/golang.org/x/oauth2/clientcredentials -rf'
+					sh 'cp oauth2/clientcredentials ausf/vendor/golang.org/x/oauth2/clientcredentials -rf'
+					//sh 'cp oauth2/clientcredentials n3iwf/vendor/golang.org/x/oauth2/clientcredentials -rf'
+					sh 'cp oauth2/clientcredentials nrf/vendor/golang.org/x/oauth2/clientcredentials -rf'
+					sh 'cp oauth2/clientcredentials nssf/vendor/golang.org/x/oauth2/clientcredentials -rf'
+					sh 'cp oauth2/clientcredentials pcf/vendor/golang.org/x/oauth2/clientcredentials -rf'
+					sh 'cp oauth2/clientcredentials smf/vendor/golang.org/x/oauth2/clientcredentials -rf'
+					sh 'cp oauth2/clientcredentials udm/vendor/golang.org/x/oauth2/clientcredentials -rf'
+					sh 'cp oauth2/clientcredentials udr/vendor/golang.org/x/oauth2/clientcredentials -rf'
+				}
+            }
+        }
+		stage('Rebuilding free5gc with OAuth enforced') {
+			steps {
+				dir('_output/free5gc/amf') {
+					sh "go build -v ./..."
+				}
+				dir('_output/free5gc/ausf') {
+					sh "go build -v ./..."
+				}
+				dir('_output/free5gc/n3iwf') {
+					sh "go build -v ./..."
+				}
+				dir('_output/free5gc/nrf') {
+					sh "go build -v ./..."
+				}
+				dir('_output/free5gc/nssf') {
+					sh "go build -v ./..."
+				}
+				dir('_output/free5gc/pcf') {
+					sh "go build -v ./..."
+				}
+				dir('_output/free5gc/smf') {
+					sh "go build -v ./..."
+				}
+				dir('_output/free5gc/udm') {
+					sh "go build -v ./..."
+				}
+				dir('_output/free5gc/udr') {
+					sh "go build -v ./..."
+				}
+			}
+		}
+        stage('Deleting _outputs') {
+            steps {
+                echo 'Destroying outputs...'
+				dir('_output') {
+					deleteDir()
+				}
+            }
+        }
+    }
+
+	post {
+        always {
+			echo 'Cleaning up _output'
+			deleteDir()
+		}
+	}
+}

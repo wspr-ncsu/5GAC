@@ -1,0 +1,802 @@
+openapi: 3.0.0
+info:
+  title: 3gpp-time-sync-exposure
+  version: 1.0.0-alpha.2
+  description: |
+    API for time synchronization exposure.
+    © 2021, 3GPP Organizational Partners (ARIB, ATIS, CCSA, ETSI, TSDSI, TTA, TTC).
+    All rights reserved.
+externalDocs:
+  description: 3GPP TS 29.522 V17.3.0; 5G System; Network Exposure Function Northbound APIs.
+  url: 'http://www.3gpp.org/ftp/Specs/archive/29_series/29.522/'
+security:
+  - {}
+  - oAuth2ClientCredentials: []
+servers:
+  - url: '{apiRoot}/3gpp-time-sync/v1'
+    variables:
+      apiRoot:
+        default: https://example.com
+        description: apiRoot as defined in subclause 5.2.4 of 3GPP TS 29.122.
+paths:
+  /{afId}/subscriptions:
+    get:
+      summary: read all of the active subscriptions for the AF
+      tags:
+        - Time Synchronization Exposure Subscriptions
+      parameters:
+        - name: afId
+          in: path
+          description: Identifier of the AF
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK (Successful get all of the active subscriptions for the AF)
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TimeSyncExposureSubsc'
+                minItems: 0
+        '307':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/307'
+        '308':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/308'
+        '400':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/400'
+        '401':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/401'
+        '403':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/403'
+        '404':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/404'
+        '406':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/406'
+        '429':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/429'
+        '500':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/500'
+        '503':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/503'
+        default:
+          $ref: 'TS29122_CommonData.yaml#/components/responses/default'
+
+    post:
+      summary: Creates a new subscription resource
+      tags:
+        - Time Synchronization Exposure Subscriptions
+      parameters:
+        - name: afId
+          in: path
+          description: Identifier of the AF
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: new subscription creation
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TimeSyncExposureSubsc'
+      responses:
+        '201':
+          description: Created (Successful creation)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeSyncExposureSubsc'
+          headers:
+            Location:
+              description: 'Contains the URI of the newly created resource'
+              required: true
+              schema:
+                type: string
+        '400':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/400'
+        '401':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/401'
+        '403':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/403'
+        '404':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/404'
+        '411':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/411'
+        '413':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/413'
+        '415':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/415'
+        '429':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/429'
+        '500':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/500'
+        '503':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/503'
+        default:
+          $ref: 'TS29122_CommonData.yaml#/components/responses/default'
+      callbacks:
+        timeSyncSubsNotification:
+          '{$request.body#/subsNotifUri}':
+            post:
+              requestBody:
+                description: Notification for Time Synchronization Capability for a list of UEs.
+                required: true
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/TimeSyncExposureSubsNotif'
+              responses:
+                '204':
+                  description: Expected response to a successful callback processing without a body
+                '307':
+                  $ref: 'TS29122_CommonData.yaml#/components/responses/307'
+                '308':
+                  $ref: 'TS29122_CommonData.yaml#/components/responses/308'
+                '400':
+                  $ref: 'TS29122_CommonData.yaml#/components/responses/400'
+                '401':
+                  $ref: 'TS29122_CommonData.yaml#/components/responses/401'
+                '403':
+                  $ref: 'TS29122_CommonData.yaml#/components/responses/403'
+                '404':
+                  $ref: 'TS29122_CommonData.yaml#/components/responses/404'
+                '411':
+                  $ref: 'TS29122_CommonData.yaml#/components/responses/411'
+                '413':
+                  $ref: 'TS29122_CommonData.yaml#/components/responses/413'
+                '415':
+                  $ref: 'TS29122_CommonData.yaml#/components/responses/415'
+                '429':
+                  $ref: 'TS29122_CommonData.yaml#/components/responses/429'
+                '500':
+                  $ref: 'TS29122_CommonData.yaml#/components/responses/500'
+                '503':
+                  $ref: 'TS29122_CommonData.yaml#/components/responses/503'
+                default:
+                  $ref: 'TS29122_CommonData.yaml#/components/responses/default'
+
+  /{afId}/subscriptions/{subscriptionId}:
+    get:
+      summary: read an active subscription for the AF and the subscription Id
+      tags:
+        - Individual Time Synchronization Exposure Subscription
+      parameters:
+        - name: afId
+          in: path
+          description: Identifier of the AF
+          required: true
+          schema:
+            type: string
+        - name: subscriptionId
+          in: path
+          description: Identifier of the subscription resource
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK (Successful get the active subscription)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeSyncExposureSubsc'
+        '307':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/307'
+        '308':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/308'
+        '400':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/400'
+        '401':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/401'
+        '403':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/403'
+        '404':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/404'
+        '406':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/406'
+        '429':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/429'
+        '500':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/500'
+        '503':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/503'
+        default:
+          $ref: 'TS29122_CommonData.yaml#/components/responses/default'
+
+
+    delete:
+      summary: Deletes an already existing subscription
+      tags:
+        - Individual Time Synchronization Exposure Subscription
+      parameters:
+        - name: afId
+          in: path
+          description: Identifier of the AF
+          required: true
+          schema:
+            type: string
+        - name: subscriptionId
+          in: path
+          description: Identifier of the subscription resource
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: No Content (Successful deletion of the existing subscription)
+        '307':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/307'
+        '308':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/308'
+        '400':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/400'
+        '401':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/401'
+        '403':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/403'
+        '404':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/404'
+        '429':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/429'
+        '500':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/500'
+        '503':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/503'
+        default:
+          $ref: 'TS29122_CommonData.yaml#/components/responses/default'
+
+  /{afId}/subscriptions/{subscriptionId}/configurations:
+    get:
+      summary: read all of the active configurations for the AF
+      tags:
+        - Time Synchronization Exposure Configurations
+      parameters:
+        - name: afId
+          in: path
+          description: Identifier of the AF
+          required: true
+          schema:
+            type: string
+        - name: subscriptionId
+          description: String identifying the individual synchronization Exposure Subscription resource in the NEF
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK (Successful get all of the active configurations for the AF)
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TimeSyncExposureConfig'
+                minItems: 0
+        '307':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/307'
+        '308':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/308'
+        '400':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/400'
+        '401':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/401'
+        '403':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/403'
+        '404':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/404'
+        '406':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/406'
+        '429':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/429'
+        '500':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/500'
+        '503':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/503'
+        default:
+          $ref: 'TS29122_CommonData.yaml#/components/responses/default'
+
+    post:
+      summary: Creates a new configuration resource
+      tags:
+        - Time Synchronization Exposure Configurations
+      parameters:
+        - name: afId
+          in: path
+          description: Identifier of the AF
+          required: true
+          schema:
+            type: string
+        - name: subscriptionId
+          description: String identifying the individual synchronization Exposure Subscription resource in the NEF
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: new configuration creation
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TimeSyncExposureConfig'
+      responses:
+        '201':
+          description: Created (Successful creation)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeSyncExposureConfig'
+          headers:
+            Location:
+              description: 'Contains the URI of the newly created resource'
+              required: true
+              schema:
+                type: string
+        '400':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/400'
+        '401':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/401'
+        '403':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/403'
+        '404':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/404'
+        '411':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/411'
+        '413':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/413'
+        '415':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/415'
+        '429':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/429'
+        '500':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/500'
+        '503':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/503'
+        default:
+          $ref: 'TS29122_CommonData.yaml#/components/responses/default'
+      callbacks:
+        timeSyncConfigNotification:
+          '{$request.body#/configNotifUri}':
+            post:
+              requestBody:
+                description: Notification for Time Synchronization Service status.
+                required: true
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/TimeSyncExposureConfigNotif'
+              responses:
+                '204':
+                  description: Expected response to a successful callback processing without a body
+                '307':
+                  $ref: 'TS29122_CommonData.yaml#/components/responses/307'
+                '308':
+                  $ref: 'TS29122_CommonData.yaml#/components/responses/308'
+                '400':
+                  $ref: 'TS29122_CommonData.yaml#/components/responses/400'
+                '401':
+                  $ref: 'TS29122_CommonData.yaml#/components/responses/401'
+                '403':
+                  $ref: 'TS29122_CommonData.yaml#/components/responses/403'
+                '404':
+                  $ref: 'TS29122_CommonData.yaml#/components/responses/404'
+                '411':
+                  $ref: 'TS29122_CommonData.yaml#/components/responses/411'
+                '413':
+                  $ref: 'TS29122_CommonData.yaml#/components/responses/413'
+                '415':
+                  $ref: 'TS29122_CommonData.yaml#/components/responses/415'
+                '429':
+                  $ref: 'TS29122_CommonData.yaml#/components/responses/429'
+                '500':
+                  $ref: 'TS29122_CommonData.yaml#/components/responses/500'
+                '503':
+                  $ref: 'TS29122_CommonData.yaml#/components/responses/503'
+                default:
+                  $ref: 'TS29122_CommonData.yaml#/components/responses/default'
+
+  /{afId}/subscriptions/{subscriptionId}/configurations/{configurationId}:
+    get:
+      summary: read an active subscription for the AF and the subscription Id
+      tags:
+        - Individual Time Synchronization Exposure Subscription
+      parameters:
+        - name: afId
+          in: path
+          description: Identifier of the AF
+          required: true
+          schema:
+            type: string
+        - name: subscriptionId
+          in: path
+          description: Identifier of the subscription resource
+          required: true
+          schema:
+            type: string
+        - name: configurationId
+          in: path
+          description: Identifier of the configuration resource
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK (Successful get the active subscription)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeSyncExposureConfig'
+        '307':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/307'
+        '308':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/308'
+        '400':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/400'
+        '401':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/401'
+        '403':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/403'
+        '404':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/404'
+        '406':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/406'
+        '429':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/429'
+        '500':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/500'
+        '503':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/503'
+        default:
+          $ref: 'TS29122_CommonData.yaml#/components/responses/default'
+
+    put:
+      summary: Updates/replaces an existing configuration resource
+      tags:
+        - Individual Time Synchronization Exposure Configuration
+      parameters:
+        - name: afId
+          in: path
+          description: Identifier of the AF
+          required: true
+          schema:
+            type: string
+        - name: subscriptionId
+          in: path
+          description: Identifier of the subscription resource
+          required: true
+          schema:
+            type: string
+        - name: configurationId
+          in: path
+          description: Identifier of the configuration resource
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Parameters to update/replace the existing configuration
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TimeSyncExposureConfig'
+      responses:
+        '200':
+          description: OK (Successful deletion of the existing configuration)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeSyncExposureConfig'
+        '204':
+          description: Successful case. The resource has been successfully updated and no additional content is to be sent in the response message.
+        '307':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/307'
+        '308':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/308'
+        '400':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/400'
+        '401':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/401'
+        '403':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/403'
+        '404':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/404'
+        '411':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/411'
+        '413':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/413'
+        '415':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/415'
+        '429':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/429'
+        '500':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/500'
+        '503':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/503'
+        default:
+          $ref: 'TS29122_CommonData.yaml#/components/responses/default'
+
+    delete:
+      summary: Deletes an already existing configuration
+      tags:
+        - Individual Time Synchronization Exposure Configuration
+      parameters:
+        - name: afId
+          in: path
+          description: Identifier of the AF
+          required: true
+          schema:
+            type: string
+        - name: subscriptionId
+          in: path
+          description: Identifier of the subscription resource
+          required: true
+          schema:
+            type: string
+        - name: configurationId
+          in: path
+          description: Identifier of the configuration resource
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: No Content (Successful deletion of the existing configuration)
+        '307':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/307'
+        '308':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/308'
+        '400':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/400'
+        '401':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/401'
+        '403':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/403'
+        '404':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/404'
+        '429':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/429'
+        '500':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/500'
+        '503':
+          $ref: 'TS29122_CommonData.yaml#/components/responses/503'
+        default:
+          $ref: 'TS29122_CommonData.yaml#/components/responses/default'
+
+components:
+  securitySchemes:
+    oAuth2ClientCredentials:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: '{tokenUrl}'
+          scopes: {}
+  schemas: 
+    TimeSyncExposureSubsc:
+      description: Contains requested parameters for the subscription to the notification of time synchronization capability.
+      type: object
+      properties:
+        exterGroupId:
+          $ref: 'TS29122_CommonData.yaml#/components/schemas/ExternalGroupId'
+        gpsis:
+          type: array
+          items:
+            $ref: 'TS29571_CommonData.yaml#/components/schemas/Gpsi'
+          minItems: 1
+          description: Contains a list of UE for which the time synchronization capabilities is requested.
+        anyUeInd:
+          type: boolean
+          description: Any UE indication. This IE shall be present if the event subscription is applicable to any UE. Default value "false" is used, if not present.
+        afServiceId:
+          type: string
+          description: Identifies a service on behalf of which the AF is issuing the request.
+        dnn:
+          $ref: 'TS29571_CommonData.yaml#/components/schemas/Dnn'
+        snssai:
+          $ref: 'TS29571_CommonData.yaml#/components/schemas/Snssai'
+        subsNotifId:
+          type: string
+          description: Notification Correlation ID assigned by the NF service consumer.
+        subsNotifUri:
+          $ref: 'TS29571_CommonData.yaml#/components/schemas/Uri'
+        subscribedEvents:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubscribedEvent'
+          minItems: 1
+          description: Subscribed events
+        notifMethod:
+          $ref: 'TS29508_Nsmf_EventExposure.yaml#/components/schemas/NotificationMethod'
+        maxReportNbr:
+          $ref: 'TS29571_CommonData.yaml#/components/schemas/Uinteger'
+        expiry:
+          $ref: 'TS29571_CommonData.yaml#/components/schemas/DateTime'
+        repPeriod:
+          $ref: 'TS29571_CommonData.yaml#/components/schemas/DurationSec'
+        requestTestNotification:
+          type: boolean
+          description: Set to true by the SCS/AS to request the SCEF to send a test notification as defined in subclause 5.2.5.3 of 3GPP TS 29.122. Set to false or omitted otherwise.
+        websockNotifConfig:
+          $ref: 'TS29122_CommonData.yaml#/components/schemas/WebsockNotifConfig'
+        suppFeat:
+          $ref: 'TS29571_CommonData.yaml#/components/schemas/SupportedFeatures'
+      required:
+        - subsNotifUri
+        - subsNotifId
+    TimeSyncCapability:
+      description: Contains time synchronization capability.
+      type: object
+      properties:
+        supis:
+          type: array
+          items:
+            $ref: 'TS29571_CommonData.yaml#/components/schemas/Supi'
+          minItems: 1
+          description: Contains a list of UE for which the time synchronization capabilities is applicable.
+        gpsis:
+          type: array
+          items:
+            $ref: 'TS29571_CommonData.yaml#/components/schemas/Gpsi'
+          minItems: 1
+          description: Contains a list of UE for which the time synchronization capabilities is applicable.
+        upNodeId:
+          $ref: 'TS29571_CommonData.yaml#/components/schemas/Uint64'
+        disMethods:
+          $ref: '#/components/schemas/DistributionMethod'
+        gmCapable:
+          $ref: '#/components/schemas/GmCapable'
+        ptpProfiles:
+          type: string
+          description: Identifies the PTP profiles supported by 5GS for the reported UE.
+    DistributionMethod:
+      description: Contains the time synchronization distribution methods.
+      type: object
+      properties:
+        1588mes:
+          $ref: '#/components/schemas/1588Method'
+        1asMe:
+          type: boolean
+          description: Indicates that the IEEE Std 802.1AS-2020 method is supported if it is included and set to true.
+        5gClockMe:
+          type: boolean
+          description: Indicates that Access Stratum-based 5G clock sync is supported if it is included and set to true.
+    1588Method:
+      description: Contains time synchronization distribution methods defined in IEEE Std 1588-2019.
+      type: object
+      properties:
+        op:
+          $ref: '#/components/schemas/Operation'
+        pro:
+          $ref: '#/components/schemas/Protocol'
+      required:
+        - op
+        - pro
+    TimeSyncExposureConfig:
+      description: Contains the Time Synchronization Configuration parameters.
+      type: object
+      properties:
+        upNodeId:
+          $ref: 'TS29571_CommonData.yaml#/components/schemas/Uint64'
+        reqDisMethod:
+          $ref: '#/components/schemas/DistributionMethod'
+        gmEnable:
+          type: boolean
+          description: Indicates that the AF requests 5GS to act as a grandmaster for PTP or gPTP if it is included and set to true.
+        gmPrio:
+          $ref: 'TS29571_CommonData.yaml#/components/schemas/Uinteger'
+        timeDom:
+          $ref: 'TS29571_CommonData.yaml#/components/schemas/Uinteger'
+        ptpProfiles:
+          type: string
+          description: Identifies the PTP profiles supported by 5GS for the reported UE.
+        configNotifId:
+          type: string
+          description: Notification Correlation ID assigned by the NF service consumer.
+        configNotifUri:
+          $ref: 'TS29571_CommonData.yaml#/components/schemas/Uri'
+        tempValidity:
+          $ref: 'TS29514_Npcf_PolicyAuthorization.yaml#/components/schemas/TemporalValidity'
+      required:
+        - configNotifId
+        - configNotifUri
+
+    TimeSyncExposureSubsNotif:
+      description: Contains the notification of time synchronization capability.
+      type: object
+      properties:
+        subsNotifId:
+          type: string
+          description: Notification Correlation ID assigned by the NF service consumer.
+        eventNotifs:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubsEventNotification'
+          minItems: 1
+      required:
+        - subsNotifId
+        - eventNotifs
+
+    SubsEventNotification:
+      description: Notifications about subscribed Individual Events.
+      type: object
+      properties:
+        event:
+          $ref: '#/components/schemas/SubscribedEvent'
+        timeSyncCapas:
+          type: array
+          items:
+            $ref: '#/components/schemas/TimeSyncCapability'
+          minItems: 1
+      required:
+        - event
+
+    TimeSyncExposureConfigNotif:
+      description: Contains the notification of time synchronization service state.
+      type: object
+      properties:
+        configNotifId:
+          type: string
+          description: Notification Correlation ID assigned by the NF service consumer.
+        stateOfConfig:
+          type: string
+      required:
+        - configNotifId
+        - stateOfConfig
+    Operation:
+      anyOf:
+      - type: string
+        enum:
+          - BOUNDARY_CLOCK
+          - P2P_TRANS_CLOCK
+          - E2E_TRANS_CLOCK
+      - type: string
+        description: >
+          This string identifies supported operation.
+      description: >
+        Possible values are
+          - BOUNDARY_CLOCK: Boundary Clock is supported.
+          - P2P_TRANS_CLOCK: Peer-to-peer Transparent Clock is supported.
+          - E2E_TRANS_CLOCK: End-to-end Transparent Clock is supported.
+    Protocol:
+      anyOf:
+      - type: string
+        enum:
+          - ETH
+          - UDP_IPV4
+          - UDP_IPV6
+      - type: string
+        description: >
+          This string identifies supported protocol.
+      description: >
+        Possible values are
+          - ETH: Ethernet is supported.
+          - UDP_IPV4: UDP over IPv4 is supported.
+          - UDP_IPV6: UDP over IPv6 is supported.
+    GmCapable:
+      anyOf:
+      - type: string
+        enum:
+          - GPTP
+          - PTP
+      - type: string
+        description: >
+          This string identifies supported grandmaste.
+      description: >
+        Possible values are
+          - GPTP: gPTP grandmaster is supported.
+          - PTP: PTP grandmaste is supported.
+
+    SubscribedEvent:
+      anyOf:
+      - type: string
+        enum:
+          - AVAILABILITY_FOR_TIME_SYNC_SERVICE
+      - type: string
+        description: >
+          This string identifies supported event.
+      description: >
+        Possible values are
+          - AVAILABILITY_FOR_TIME_SYNC_SERVICE: The UE is availability for time synchronization service.

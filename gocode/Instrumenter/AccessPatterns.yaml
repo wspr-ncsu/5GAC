@@ -1,0 +1,1128 @@
+- API:
+    HTTPType: POST
+    URL:
+      root: '{apiRoot}/npcf-am-policy-control/v1'
+      path: /policies
+  Caller:
+    NetworkFunction: AMF
+    FuncName: PoliciesPost
+  Callee:
+    NetworkFunction: PCF
+    FuncName: HTTPPoliciesPost
+  Scope: npcf-am-policy-control
+- API:
+    HTTPType: POST
+    URL:
+      root: '{apiRoot}/npcf-am-policy-control/v1'
+      path: /policies/:polAssoId/update
+  Caller:
+    NetworkFunction: AMF
+    FuncName: PoliciesPolAssoIdUpdatePost
+  Callee:
+    NetworkFunction: PCF
+    FuncName: HTTPPoliciesPolAssoIdUpdatePost
+  Scope: npcf-am-policy-control
+- API:
+    HTTPType: DELETE
+    URL:
+      root: '{apiRoot}/npcf-am-policy-control/v1'
+      path: /policies/:polAssoId
+  Caller:
+    NetworkFunction: AMF
+    FuncName: PoliciesPolAssoIdDelete
+  Callee:
+    NetworkFunction: PCF
+    FuncName: HTTPPoliciesPolAssoIdDelete
+  Scope: npcf-am-policy-control
+- API:
+    HTTPType: PUT
+    URL:
+      root: '{apiRoot}/namf-comm/v1'
+      path: /ue-contexts/:ueContextId
+  Caller:
+    NetworkFunction: AMF
+    FuncName: CreateUEContext
+  Callee:
+    NetworkFunction: AMF
+    FuncName: HTTPCreateUEContext
+  Scope: namf-comm:amf
+- API:
+    HTTPType: POST
+    URL:
+      root: '{apiRoot}/namf-comm/v1'
+      path: /ue-contexts/:ueContextId/release
+  Caller:
+    NetworkFunction: AMF
+    FuncName: ReleaseUEContext
+  Callee:
+    NetworkFunction: AMF
+    FuncName: HTTPReleaseUEContext
+  Scope: namf-comm:amf
+- API:
+    HTTPType: POST
+    URL:
+      root: '{apiRoot}/namf-comm/v1'
+      path: /ue-contexts/:ueContextId/transfer
+  Caller:
+    NetworkFunction: AMF
+    FuncName: UEContextTransfer
+  Callee:
+    NetworkFunction: AMF
+    FuncName: HTTPUEContextTransfer
+  Scope: namf-comm:amf
+- API:
+    HTTPType: POST
+    URL:
+      root: '{apiRoot}/namf-comm/v1'
+      path: /ue-contexts/:ueContextId/transfer-update
+  Caller:
+    NetworkFunction: AMF
+    FuncName: RegistrationStatusUpdate
+  Callee:
+    NetworkFunction: AMF
+    FuncName: HTTPRegistrationStatusUpdate
+  Scope: namf-comm:amf
+- API:
+    HTTPType: GET
+    URL:
+      root: '{apiRoot}/nnrf-disc/v1'
+      path: /nf-instances
+  Caller:
+    NetworkFunction: AMF
+    FuncName: SearchNFInstances
+  Callee:
+    NetworkFunction: NRF
+    FuncName: HTTPSearchNFInstances
+  Scope: nnrf-disc
+- API:
+    HTTPType: PUT
+    URL:
+      root: '{apiRoot}/nnrf-nfm/v1'
+      path: /nf-instances/:nfInstanceID
+  Caller:
+    NetworkFunction: AMF
+    FuncName: RegisterNFInstance
+  Callee:
+    NetworkFunction: NRF
+    FuncName: HTTPRegisterNFInstance
+  Scope: nnrf-nfm
+- API:
+    HTTPType: DELETE
+    URL:
+      root: '{apiRoot}/nnrf-nfm/v1'
+      path: /nf-instances/:nfInstanceID
+  Caller:
+    NetworkFunction: AMF
+    FuncName: DeregisterNFInstance
+  Callee:
+    NetworkFunction: NRF
+    FuncName: HTTPDeregisterNFInstance
+  Scope: nnrf-nfm
+- API:
+    HTTPType: GET
+    URL:
+      root: '{apiRoot}/nnssf-nsselection/v1'
+      path: /network-slice-information
+  Caller:
+    NetworkFunction: AMF
+    FuncName: NSSelectionGet
+  Callee:
+    NetworkFunction: NSSF
+    FuncName: HTTPNSSelectionGet
+  Scope: nnssf-nsselection
+- API:
+    HTTPType: GET
+    URL:
+      root: '{apiRoot}/nnssf-nsselection/v1'
+      path: /network-slice-information
+  Caller:
+    NetworkFunction: AMF
+    FuncName: NSSelectionGet
+  Callee:
+    NetworkFunction: NSSF
+    FuncName: HTTPNSSelectionGet
+  Scope: nnssf-nsselection
+- API:
+    HTTPType: POST
+    URL:
+      root: '{apiRoot}/nsmf-pdusession/v1'
+      path: /sm-contexts
+  Caller:
+    NetworkFunction: AMF
+    FuncName: PostSmContexts
+  Callee:
+    NetworkFunction: SMF
+    FuncName: HTTPPostSmContexts
+  Scope: nsmf-pdusession
+- API:
+    HTTPType: POST
+    URL:
+      root: '{apiRoot}/nsmf-pdusession/v1'
+      path: /sm-contexts/:smContextRef/modify
+  Caller:
+    NetworkFunction: AMF
+    FuncName: UpdateSmContext
+  Callee:
+    NetworkFunction: SMF
+    FuncName: HTTPUpdateSmContext
+  Scope: nsmf-pdusession
+- API:
+    HTTPType: POST
+    URL:
+      root: '{apiRoot}/nsmf-pdusession/v1'
+      path: /sm-contexts/:smContextRef/release
+  Caller:
+    NetworkFunction: AMF
+    FuncName: ReleaseSmContext
+  Callee:
+    NetworkFunction: SMF
+    FuncName: HTTPReleaseSmContext
+  Scope: nsmf-pdusession
+- API:
+    HTTPType: PUT
+    URL:
+      root: '{apiRoot}/nudm-sdm/v1'
+      path: /:supi/am-data/upu-ack
+  Caller:
+    NetworkFunction: AMF
+    FuncName: PutUpuAck
+  Callee:
+    NetworkFunction: UDM
+    FuncName: HTTPPutUpuAck
+  Scope: nudm-sdm:amf
+- API:
+    HTTPType: GET
+    URL:
+      root: '{apiRoot}/nudm-sdm/v1'
+      path: /:supi/am-data
+  Caller:
+    NetworkFunction: AMF
+    FuncName: GetAmData
+  Callee:
+    NetworkFunction: UDM
+    FuncName: HTTPGetAmData
+  Scope: nudm-sdm:amf
+- API:
+    HTTPType: GET
+    URL:
+      root: '{apiRoot}/nudm-sdm/v1'
+      path: /:supi/smf-select-data
+  Caller:
+    NetworkFunction: AMF
+    FuncName: GetSmfSelectData
+  Callee:
+    NetworkFunction: UDM
+    FuncName: HTTPGetSmfSelectData
+  Scope: nudm-sdm:amf
+- API:
+    HTTPType: GET
+    URL:
+      root: '{apiRoot}/nudm-sdm/v1'
+      path: /:supi/ue-context-in-smf-data
+  Caller:
+    NetworkFunction: AMF
+    FuncName: GetUeContextInSmfData
+  Callee:
+    NetworkFunction: UDM
+    FuncName: HTTPGetUeContextInSmfData
+  Scope: nudm-sdm:amf
+- API:
+    HTTPType: POST
+    URL:
+      root: '{apiRoot}/nudm-sdm/v1'
+      path: /:ueId/sdm-subscriptions
+  Caller:
+    NetworkFunction: AMF
+    FuncName: Subscribe
+  Callee:
+    NetworkFunction: UDM
+    FuncName: HTTPSubscribe
+  Scope: nudm-sdm:amf
+- API:
+    HTTPType: GET
+    URL:
+      root: '{apiRoot}/nudm-sdm/v1'
+      path: /:supi/nssai
+  Caller:
+    NetworkFunction: AMF
+    FuncName: GetNssai
+  Callee:
+    NetworkFunction: UDM
+    FuncName: HTTPGetNssai
+  Scope: nudm-sdm:amf
+- API:
+    HTTPType: DELETE
+    URL:
+      root: '{apiRoot}/nudm-sdm/v1'
+      path: /:ueId/sdm-subscriptions/:subscriptionId
+  Caller:
+    NetworkFunction: AMF
+    FuncName: Unsubscribe
+  Callee:
+    NetworkFunction: UDM
+    FuncName: HTTPUnsubscribe
+  Scope: nudm-sdm:amf
+- API:
+    HTTPType: POST
+    URL:
+      root: '{apiRoot}/nausf-auth/v1'
+      path: /ue-authentications
+  Caller:
+    NetworkFunction: AMF
+    FuncName: UeAuthenticationsPost
+  Callee:
+    NetworkFunction: AUSF
+    FuncName: HTTPUeAuthenticationsPost
+  Scope: nausf-auth
+- API:
+    HTTPType: PUT
+    URL:
+      root: '{apiRoot}/nausf-auth/v1'
+      path: /ue-authentications/:authCtxId/5g-aka-confirmation
+  Caller:
+    NetworkFunction: AMF
+    FuncName: UeAuthenticationsAuthCtxId5gAkaConfirmationPut
+  Callee:
+    NetworkFunction: AUSF
+    FuncName: HTTPUeAuthenticationsAuthCtxId5gAkaConfirmationPut
+  Scope: nausf-auth
+- API:
+    HTTPType: POST
+    URL:
+      root: '{apiRoot}/nausf-auth/v1'
+      path: /ue-authentications/:authCtxId/eap-session
+  Caller:
+    NetworkFunction: AMF
+    FuncName: EapAuthMethod
+  Callee:
+    NetworkFunction: AUSF
+    FuncName: HTTPEapAuthMethod
+  Scope: nausf-auth
+- API:
+    HTTPType: PATCH
+    URL:
+      root: '{apiRoot}/nudm-pp/v1'
+      path: /:gpsi/pp-data
+  Caller:
+    NetworkFunction: AMF
+    FuncName: Update
+  Callee:
+    NetworkFunction: UDM
+    FuncName: HTTPUpdate
+  Scope: nudm-pp
+- API:
+    HTTPType: PATCH
+    URL:
+      root: '{apiRoot}/nudm-uecm/v1'
+      path: /:ueId/registrations/amf-non-3gpp-access
+  Caller:
+    NetworkFunction: AMF
+    FuncName: UpdateAmfNon3gppAccess
+  Callee:
+    NetworkFunction: UDM
+    FuncName: HTTPUpdateAmfNon3gppAccess
+  Scope: nudm-uecm
+- API:
+    HTTPType: PATCH
+    URL:
+      root: '{apiRoot}/nudm-uecm/v1'
+      path: /:ueId/registrations/amf-non-3gpp-access
+  Caller:
+    NetworkFunction: AMF
+    FuncName: UpdateAmfNon3gppAccess
+  Callee:
+    NetworkFunction: UDM
+    FuncName: HTTPUpdateAmfNon3gppAccess
+  Scope: nudm-uecm
+- API:
+    HTTPType: PATCH
+    URL:
+      root: '{apiRoot}/nudm-uecm/v1'
+      path: /:ueId/registrations/amf-non-3gpp-access
+  Caller:
+    NetworkFunction: AMF
+    FuncName: UpdateAmfNon3gppAccess
+  Callee:
+    NetworkFunction: UDM
+    FuncName: HTTPUpdateAmfNon3gppAccess
+  Scope: nudm-uecm:amf-registration:write
+- API:
+    HTTPType: GET
+    URL:
+      root: '{apiRoot}/nnrf-disc/v1'
+      path: /nf-instances
+  Caller:
+    NetworkFunction: AUSF
+    FuncName: SearchNFInstances
+  Callee:
+    NetworkFunction: NRF
+    FuncName: HTTPSearchNFInstances
+  Scope: nnrf-disc
+- API:
+    HTTPType: PUT
+    URL:
+      root: '{apiRoot}/nnrf-nfm/v1'
+      path: /nf-instances/:nfInstanceID
+  Caller:
+    NetworkFunction: AUSF
+    FuncName: RegisterNFInstance
+  Callee:
+    NetworkFunction: NRF
+    FuncName: HTTPRegisterNFInstance
+  Scope: nnrf-nfm
+- API:
+    HTTPType: DELETE
+    URL:
+      root: '{apiRoot}/nnrf-nfm/v1'
+      path: /nf-instances/:nfInstanceID
+  Caller:
+    NetworkFunction: AUSF
+    FuncName: DeregisterNFInstance
+  Callee:
+    NetworkFunction: NRF
+    FuncName: HTTPDeregisterNFInstance
+  Scope: nnrf-nfm
+- API:
+    HTTPType: POST
+    URL:
+      root: '{apiRoot}/nudm-ueau/v1'
+      path: /:supi/auth-events
+  Caller:
+    NetworkFunction: AUSF
+    FuncName: ConfirmAuth
+  Callee:
+    NetworkFunction: UDM
+    FuncName: HTTPConfirmAuth
+  Scope: nudm-ueau
+- API:
+    HTTPType: POST
+    URL:
+      root: '{apiRoot}/nudm-ueau/v1'
+      path: /:supiOrSuci/security-information/generate-auth-data
+  Caller:
+    NetworkFunction: AUSF
+    FuncName: GenerateAuthData
+  Callee:
+    NetworkFunction: UDM
+    FuncName: HTTPGenerateAuthData
+  Scope: nudm-ueau
+- API:
+    HTTPType: PUT
+    URL:
+      root: '{apiRoot}/nnrf-nfm/v1'
+      path: /nf-instances/:nfInstanceID
+  Caller:
+    NetworkFunction: NSSF
+    FuncName: RegisterNFInstance
+  Callee:
+    NetworkFunction: NRF
+    FuncName: HTTPRegisterNFInstance
+  Scope: nnrf-nfm
+- API:
+    HTTPType: DELETE
+    URL:
+      root: '{apiRoot}/nnrf-nfm/v1'
+      path: /nf-instances/:nfInstanceID
+  Caller:
+    NetworkFunction: NSSF
+    FuncName: DeregisterNFInstance
+  Callee:
+    NetworkFunction: NRF
+    FuncName: HTTPDeregisterNFInstance
+  Scope: nnrf-nfm
+- API:
+    HTTPType: POST
+    URL:
+      root: '{apiRoot}/namf-comm/v1'
+      path: /subscriptions
+  Caller:
+    NetworkFunction: PCF
+    FuncName: AMFStatusChangeSubscribe
+  Callee:
+    NetworkFunction: AMF
+    FuncName: HTTPAMFStatusChangeSubscribe
+  Scope: namf-comm:pcf
+- API:
+    HTTPType: POST
+    URL:
+      root: '{apiRoot}/nudr-dr/v1'
+      path: /application-data/influenceData/subs-to-notify
+  Caller:
+    NetworkFunction: PCF
+    FuncName: ApplicationDataInfluenceDataSubsToNotifyPost
+  Callee:
+    NetworkFunction: UDR
+    FuncName: HTTPApplicationDataInfluenceDataSubsToNotifyPost
+  Scope: nudr-dr:pcf
+- API:
+    HTTPType: DELETE
+    URL:
+      root: '{apiRoot}/nudr-dr/v1'
+      path: /application-data/influenceData/subs-to-notify/:subscriptionId
+  Caller:
+    NetworkFunction: PCF
+    FuncName: ApplicationDataInfluenceDataSubsToNotifySubscriptionIdDelete
+  Callee:
+    NetworkFunction: UDR
+    FuncName: HTTPApplicationDataInfluenceDataSubsToNotifySubscriptionIdDelete
+  Scope: nudr-dr:pcf
+- API:
+    HTTPType: GET
+    URL:
+      root: '{apiRoot}/nnrf-disc/v1'
+      path: /nf-instances
+  Caller:
+    NetworkFunction: PCF
+    FuncName: SearchNFInstances
+  Callee:
+    NetworkFunction: NRF
+    FuncName: HTTPSearchNFInstances
+  Scope: nnrf-disc
+- API:
+    HTTPType: PUT
+    URL:
+      root: '{apiRoot}/nnrf-nfm/v1'
+      path: /nf-instances/:nfInstanceID
+  Caller:
+    NetworkFunction: PCF
+    FuncName: RegisterNFInstance
+  Callee:
+    NetworkFunction: NRF
+    FuncName: HTTPRegisterNFInstance
+  Scope: nnrf-nfm
+- API:
+    HTTPType: DELETE
+    URL:
+      root: '{apiRoot}/nnrf-nfm/v1'
+      path: /nf-instances/:nfInstanceID
+  Caller:
+    NetworkFunction: PCF
+    FuncName: DeregisterNFInstance
+  Callee:
+    NetworkFunction: NRF
+    FuncName: HTTPDeregisterNFInstance
+  Scope: nnrf-nfm
+- API:
+    HTTPType: GET
+    URL:
+      root: '{apiRoot}/nudr-dr/v1'
+      path: /policy-data/ues/:ueId/am-data
+  Caller:
+    NetworkFunction: PCF
+    FuncName: PolicyDataUesUeIdAmDataGet
+  Callee:
+    NetworkFunction: UDR
+    FuncName: HTTPPolicyDataUesUeIdAmDataGet
+  Scope: nudr-dr:pcf
+- API:
+    HTTPType: PUT
+    URL:
+      root: '{apiRoot}/nudr-dr/v1'
+      path: /policy-data/bdt-data/:bdtReferenceId
+  Caller:
+    NetworkFunction: PCF
+    FuncName: PolicyDataBdtDataBdtReferenceIdPut
+  Callee:
+    NetworkFunction: UDR
+    FuncName: HTTPPolicyDataBdtDataBdtReferenceIdPut
+  Scope: nudr-dr:pcf
+- API:
+    HTTPType: GET
+    URL:
+      root: '{apiRoot}/nudr-dr/v1'
+      path: /policy-data/bdt-data
+  Caller:
+    NetworkFunction: PCF
+    FuncName: PolicyDataBdtDataGet
+  Callee:
+    NetworkFunction: UDR
+    FuncName: HTTPPolicyDataBdtDataGet
+  Scope: nudr-dr:pcf
+- API:
+    HTTPType: PUT
+    URL:
+      root: '{apiRoot}/nudr-dr/v1'
+      path: /policy-data/bdt-data/:bdtReferenceId
+  Caller:
+    NetworkFunction: PCF
+    FuncName: PolicyDataBdtDataBdtReferenceIdPut
+  Callee:
+    NetworkFunction: UDR
+    FuncName: HTTPPolicyDataBdtDataBdtReferenceIdPut
+  Scope: nudr-dr:pcf
+- API:
+    HTTPType: GET
+    URL:
+      root: '{apiRoot}/nudr-dr/v1'
+      path: /policy-data/bdt-data/:bdtReferenceId
+  Caller:
+    NetworkFunction: PCF
+    FuncName: PolicyDataBdtDataBdtReferenceIdGet
+  Callee:
+    NetworkFunction: UDR
+    FuncName: HTTPPolicyDataBdtDataBdtReferenceIdGet
+  Scope: nudr-dr:pcf
+- API:
+    HTTPType: GET
+    URL:
+      root: '{apiRoot}/nudr-dr/v1'
+      path: /policy-data/ues/:ueId/sm-data
+  Caller:
+    NetworkFunction: PCF
+    FuncName: PolicyDataUesUeIdSmDataGet
+  Callee:
+    NetworkFunction: UDR
+    FuncName: HTTPPolicyDataUesUeIdSmDataGet
+  Scope: nudr-dr:pcf
+- API:
+    HTTPType: GET
+    URL:
+      root: '{apiRoot}/nudr-dr/v1'
+      path: /application-data/influenceData
+  Caller:
+    NetworkFunction: PCF
+    FuncName: ApplicationDataInfluenceDataGet
+  Callee:
+    NetworkFunction: UDR
+    FuncName: HTTPApplicationDataInfluenceDataGet
+  Scope: nudr-dr:pcf
+- API:
+    HTTPType: GET
+    URL:
+      root: '{apiRoot}/nnrf-disc/v1'
+      path: /nf-instances
+  Caller:
+    NetworkFunction: SMF
+    FuncName: SearchNFInstances
+  Callee:
+    NetworkFunction: NRF
+    FuncName: HTTPSearchNFInstances
+  Scope: nnrf-disc
+- API:
+    HTTPType: POST
+    URL:
+      root: '{apiRoot}/namf-comm/v1'
+      path: /ue-contexts/:ueContextId/n1-n2-messages
+  Caller:
+    NetworkFunction: SMF
+    FuncName: N1N2MessageTransfer
+  Callee:
+    NetworkFunction: AMF
+    FuncName: HTTPN1N2MessageTransfer
+  Scope: namf-comm:smf
+- API:
+    HTTPType: PUT
+    URL:
+      root: '{apiRoot}/nnrf-nfm/v1'
+      path: /nf-instances/:nfInstanceID
+  Caller:
+    NetworkFunction: SMF
+    FuncName: RegisterNFInstance
+  Callee:
+    NetworkFunction: NRF
+    FuncName: HTTPRegisterNFInstance
+  Scope: nnrf-nfm
+- API:
+    HTTPType: DELETE
+    URL:
+      root: '{apiRoot}/nnrf-nfm/v1'
+      path: /nf-instances/:nfInstanceID
+  Caller:
+    NetworkFunction: SMF
+    FuncName: DeregisterNFInstance
+  Callee:
+    NetworkFunction: NRF
+    FuncName: HTTPDeregisterNFInstance
+  Scope: nnrf-nfm
+- API:
+    HTTPType: POST
+    URL:
+      root: '{apiRoot}/npcf-smpolicycontrol/v1'
+      path: /sm-policies
+  Caller:
+    NetworkFunction: SMF
+    FuncName: SmPoliciesPost
+  Callee:
+    NetworkFunction: PCF
+    FuncName: HTTPSmPoliciesPost
+  Scope: npcf-smpolicycontrol
+- API:
+    HTTPType: POST
+    URL:
+      root: '{apiRoot}/npcf-smpolicycontrol/v1'
+      path: /sm-policies/:smPolicyId/update
+  Caller:
+    NetworkFunction: SMF
+    FuncName: SmPoliciesSmPolicyIdUpdatePost
+  Callee:
+    NetworkFunction: PCF
+    FuncName: HTTPSmPoliciesSmPolicyIdUpdatePost
+  Scope: npcf-smpolicycontrol
+- API:
+    HTTPType: POST
+    URL:
+      root: '{apiRoot}/npcf-smpolicycontrol/v1'
+      path: /sm-policies/:smPolicyId/delete
+  Caller:
+    NetworkFunction: SMF
+    FuncName: SmPoliciesSmPolicyIdDeletePost
+  Callee:
+    NetworkFunction: PCF
+    FuncName: HTTPSmPoliciesSmPolicyIdDeletePost
+  Scope: npcf-smpolicycontrol
+- API:
+    HTTPType: GET
+    URL:
+      root: '{apiRoot}/nudm-sdm/v1'
+      path: /:supi/sm-data
+  Caller:
+    NetworkFunction: SMF
+    FuncName: GetSmData
+  Callee:
+    NetworkFunction: UDM
+    FuncName: HTTPGetSmData
+  Scope: nudm-sdm:smf
+- API:
+    HTTPType: GET
+    URL:
+      root: '{apiRoot}/nnrf-disc/v1'
+      path: /nf-instances
+  Caller:
+    NetworkFunction: UDM
+    FuncName: SearchNFInstances
+  Callee:
+    NetworkFunction: NRF
+    FuncName: HTTPSearchNFInstances
+  Scope: nnrf-disc
+- API:
+    HTTPType: PUT
+    URL:
+      root: '{apiRoot}/nnrf-nfm/v1'
+      path: /nf-instances/:nfInstanceID
+  Caller:
+    NetworkFunction: UDM
+    FuncName: RegisterNFInstance
+  Callee:
+    NetworkFunction: NRF
+    FuncName: HTTPRegisterNFInstance
+  Scope: nnrf-nfm
+- API:
+    HTTPType: DELETE
+    URL:
+      root: '{apiRoot}/nnrf-nfm/v1'
+      path: /nf-instances/:nfInstanceID
+  Caller:
+    NetworkFunction: UDM
+    FuncName: DeregisterNFInstance
+  Callee:
+    NetworkFunction: NRF
+    FuncName: HTTPDeregisterNFInstance
+  Scope: nnrf-nfm
+- API:
+    HTTPType: PUT
+    URL:
+      root: '{apiRoot}/nudr-dr/v1'
+      path: /subscription-data/:ueId/authentication-data/authentication-status
+  Caller:
+    NetworkFunction: UDM
+    FuncName: CreateAuthenticationStatus
+  Callee:
+    NetworkFunction: UDR
+    FuncName: HTTPCreateAuthenticationStatus
+  Scope: nudr-dr:udm
+- API:
+    HTTPType: GET
+    URL:
+      root: '{apiRoot}/nudr-dr/v1'
+      path: /subscription-data/:ueId/authentication-data/authentication-subscription
+  Caller:
+    NetworkFunction: UDM
+    FuncName: QueryAuthSubsData
+  Callee:
+    NetworkFunction: UDR
+    FuncName: HTTPQueryAuthSubsData
+  Scope: nudr-dr:udm
+- API:
+    HTTPType: PATCH
+    URL:
+      root: '{apiRoot}/nudr-dr/v1'
+      path: /subscription-data/:ueId/authentication-data/authentication-subscription
+  Caller:
+    NetworkFunction: UDM
+    FuncName: ModifyAuthentication
+  Callee:
+    NetworkFunction: UDR
+    FuncName: HTTPModifyAuthentication
+  Scope: nudr-dr:udm
+- API:
+    HTTPType: PATCH
+    URL:
+      root: '{apiRoot}/nudr-dr/v1'
+      path: /subscription-data/:ueId/pp-data
+  Caller:
+    NetworkFunction: UDM
+    FuncName: ModifyPpData
+  Callee:
+    NetworkFunction: UDR
+    FuncName: HTTPModifyPpData
+  Scope: nudr-dr:udm
+- API:
+    HTTPType: GET
+    URL:
+      root: '{apiRoot}/nudr-dr/v1'
+      path: /subscription-data/:ueId/:servingPlmnId/provisioned-data/am-data
+  Caller:
+    NetworkFunction: UDM
+    FuncName: QueryAmData
+  Callee:
+    NetworkFunction: UDR
+    FuncName: HTTPQueryAmData
+  Scope: nudr-dr:udm
+- API:
+    HTTPType: GET
+    URL:
+      root: '{apiRoot}/nudr-dr/v1'
+      path: /subscription-data/:ueId/identity-data
+  Caller:
+    NetworkFunction: UDM
+    FuncName: GetIdentityData
+  Callee:
+    NetworkFunction: UDR
+    FuncName: HTTPGetIdentityData
+  Scope: nudr-dr:udm
+- API:
+    HTTPType: GET
+    URL:
+      root: '{apiRoot}/nudr-dr/v1'
+      path: /subscription-data/:ueId/:servingPlmnId/provisioned-data/am-data
+  Caller:
+    NetworkFunction: UDM
+    FuncName: QueryAmData
+  Callee:
+    NetworkFunction: UDR
+    FuncName: HTTPQueryAmData
+  Scope: nudr-dr:udm
+- API:
+    HTTPType: GET
+    URL:
+      root: '{apiRoot}/nudr-dr/v1'
+      path: /subscription-data/:ueId/:servingPlmnId/provisioned-data/smf-selection-subscription-data
+  Caller:
+    NetworkFunction: UDM
+    FuncName: QuerySmfSelectData
+  Callee:
+    NetworkFunction: UDR
+    FuncName: HTTPQuerySmfSelectData
+  Scope: nudr-dr:udm
+- API:
+    HTTPType: GET
+    URL:
+      root: '{apiRoot}/nudr-dr/v1'
+      path: /subscription-data/:ueId/context-data/smf-registrations
+  Caller:
+    NetworkFunction: UDM
+    FuncName: QuerySmfRegList
+  Callee:
+    NetworkFunction: UDR
+    FuncName: HTTPQuerySmfRegList
+  Scope: nudr-dr:udm
+- API:
+    HTTPType: GET
+    URL:
+      root: '{apiRoot}/nudr-dr/v1'
+      path: /subscription-data/:ueId/:servingPlmnId/provisioned-data/sm-data
+  Caller:
+    NetworkFunction: UDM
+    FuncName: QuerySmData
+  Callee:
+    NetworkFunction: UDR
+    FuncName: HTTPQuerySmData
+  Scope: nudr-dr:udm
+- API:
+    HTTPType: GET
+    URL:
+      root: '{apiRoot}/nudr-dr/v1'
+      path: /subscription-data/:ueId/:servingPlmnId/provisioned-data/trace-data
+  Caller:
+    NetworkFunction: UDM
+    FuncName: QueryTraceData
+  Callee:
+    NetworkFunction: UDR
+    FuncName: HTTPQueryTraceData
+  Scope: nudr-dr:udm
+- API:
+    HTTPType: GET
+    URL:
+      root: '{apiRoot}/nudm-sdm/v1'
+      path: /shared-data
+  Caller:
+    NetworkFunction: UDM
+    FuncName: GetSharedData
+  Callee:
+    NetworkFunction: UDM
+    FuncName: HTTPGetSharedData
+  Scope: nudm-sdm:udm
+- API:
+    HTTPType: GET
+    URL:
+      root: '{apiRoot}/nudr-dr/v1'
+      path: /subscription-data/:ueId/:servingPlmnId/provisioned-data/sm-data
+  Caller:
+    NetworkFunction: UDM
+    FuncName: QuerySmData
+  Callee:
+    NetworkFunction: UDR
+    FuncName: HTTPQuerySmData
+  Scope: nudr-dr:udm
+- API:
+    HTTPType: GET
+    URL:
+      root: '{apiRoot}/nudr-dr/v1'
+      path: /subscription-data/:ueId/:servingPlmnId/provisioned-data/am-data
+  Caller:
+    NetworkFunction: UDM
+    FuncName: QueryAmData
+  Callee:
+    NetworkFunction: UDR
+    FuncName: HTTPQueryAmData
+  Scope: nudr-dr:udm
+- API:
+    HTTPType: GET
+    URL:
+      root: '{apiRoot}/nudr-dr/v1'
+      path: /subscription-data/:ueId/:servingPlmnId/provisioned-data/smf-selection-subscription-data
+  Caller:
+    NetworkFunction: UDM
+    FuncName: QuerySmfSelectData
+  Callee:
+    NetworkFunction: UDR
+    FuncName: HTTPQuerySmfSelectData
+  Scope: nudr-dr:udm
+- API:
+    HTTPType: POST
+    URL:
+      root: '{apiRoot}/nudm-sdm/v1'
+      path: /shared-data-subscriptions
+  Caller:
+    NetworkFunction: UDM
+    FuncName: SubscribeToSharedData
+  Callee:
+    NetworkFunction: UDM
+    FuncName: HTTPSubscribeToSharedData
+  Scope: nudm-sdm:udm
+- API:
+    HTTPType: POST
+    URL:
+      root: '{apiRoot}/nudr-dr/v1'
+      path: /subscription-data/:ueId/context-data/sdm-subscriptions
+  Caller:
+    NetworkFunction: UDM
+    FuncName: CreateSdmSubscriptions
+  Callee:
+    NetworkFunction: UDR
+    FuncName: HTTPCreateSdmSubscriptions
+  Scope: nudr-dr:udm
+- API:
+    HTTPType: DELETE
+    URL:
+      root: '{apiRoot}/nudm-sdm/v1'
+      path: /shared-data-subscriptions/:subscriptionId
+  Caller:
+    NetworkFunction: UDM
+    FuncName: UnsubscribeForSharedData
+  Callee:
+    NetworkFunction: UDM
+    FuncName: HTTPUnsubscribeForSharedData
+  Scope: nudm-sdm:udm
+- API:
+    HTTPType: DELETE
+    URL:
+      root: '{apiRoot}/nudr-dr/v1'
+      path: /subscription-data/:ueId/context-data/sdm-subscriptions/:subsId
+  Caller:
+    NetworkFunction: UDM
+    FuncName: RemovesdmSubscriptions
+  Callee:
+    NetworkFunction: UDR
+    FuncName: HTTPRemovesdmSubscriptions
+  Scope: nudr-dr:udm
+- API:
+    HTTPType: PUT
+    URL:
+      root: '{apiRoot}/nudr-dr/v1'
+      path: /subscription-data/:ueId/context-data/sdm-subscriptions/:subsId
+  Caller:
+    NetworkFunction: UDM
+    FuncName: Updatesdmsubscriptions
+  Callee:
+    NetworkFunction: UDR
+    FuncName: HTTPUpdatesdmsubscriptions
+  Scope: nudr-dr:udm
+- API:
+    HTTPType: PUT
+    URL:
+      root: '{apiRoot}/nudr-dr/v1'
+      path: /subscription-data/:ueId/context-data/sdm-subscriptions/:subsId
+  Caller:
+    NetworkFunction: UDM
+    FuncName: Updatesdmsubscriptions
+  Callee:
+    NetworkFunction: UDR
+    FuncName: HTTPUpdatesdmsubscriptions
+  Scope: nudr-dr:udm
+- API:
+    HTTPType: GET
+    URL:
+      root: '{apiRoot}/nudr-dr/v1'
+      path: /subscription-data/:ueId/:servingPlmnId/provisioned-data/trace-data
+  Caller:
+    NetworkFunction: UDM
+    FuncName: QueryTraceData
+  Callee:
+    NetworkFunction: UDR
+    FuncName: HTTPQueryTraceData
+  Scope: nudr-dr:udm
+- API:
+    HTTPType: GET
+    URL:
+      root: '{apiRoot}/nudr-dr/v1'
+      path: /subscription-data/:ueId/context-data/smf-registrations
+  Caller:
+    NetworkFunction: UDM
+    FuncName: QuerySmfRegList
+  Callee:
+    NetworkFunction: UDR
+    FuncName: HTTPQuerySmfRegList
+  Scope: nudr-dr:udm
+- API:
+    HTTPType: GET
+    URL:
+      root: '{apiRoot}/nudr-dr/v1'
+      path: /subscription-data/:ueId/context-data/amf-3gpp-access
+  Caller:
+    NetworkFunction: UDM
+    FuncName: QueryAmfContext3gpp
+  Callee:
+    NetworkFunction: UDR
+    FuncName: HTTPQueryAmfContext3gpp
+  Scope: nudr-dr:udm
+- API:
+    HTTPType: GET
+    URL:
+      root: '{apiRoot}/nudr-dr/v1'
+      path: /subscription-data/:ueId/context-data/amf-non-3gpp-access
+  Caller:
+    NetworkFunction: UDM
+    FuncName: QueryAmfContextNon3gpp
+  Callee:
+    NetworkFunction: UDR
+    FuncName: HTTPQueryAmfContextNon3gpp
+  Scope: nudr-dr:udm
+- API:
+    HTTPType: PUT
+    URL:
+      root: '{apiRoot}/nudr-dr/v1'
+      path: /subscription-data/:ueId/context-data/amf-3gpp-access
+  Caller:
+    NetworkFunction: UDM
+    FuncName: CreateAmfContext3gpp
+  Callee:
+    NetworkFunction: UDR
+    FuncName: HTTPCreateAmfContext3gpp
+  Scope: nudr-dr:udm
+- API:
+    HTTPType: PUT
+    URL:
+      root: '{apiRoot}/nudr-dr/v1'
+      path: /subscription-data/:ueId/context-data/amf-non-3gpp-access
+  Caller:
+    NetworkFunction: UDM
+    FuncName: CreateAmfContextNon3gpp
+  Callee:
+    NetworkFunction: UDR
+    FuncName: HTTPCreateAmfContextNon3gpp
+  Scope: nudr-dr:udm
+- API:
+    HTTPType: PATCH
+    URL:
+      root: '{apiRoot}/nudr-dr/v1'
+      path: /subscription-data/:ueId/context-data/amf-3gpp-access
+  Caller:
+    NetworkFunction: UDM
+    FuncName: AmfContext3gpp
+  Callee:
+    NetworkFunction: UDR
+    FuncName: HTTPAmfContext3gpp
+  Scope: nudr-dr:udm
+- API:
+    HTTPType: PATCH
+    URL:
+      root: '{apiRoot}/nudr-dr/v1'
+      path: /subscription-data/:ueId/context-data/amf-non-3gpp-access
+  Caller:
+    NetworkFunction: UDM
+    FuncName: AmfContextNon3gpp
+  Callee:
+    NetworkFunction: UDR
+    FuncName: HTTPAmfContextNon3gpp
+  Scope: nudr-dr:udm
+- API:
+    HTTPType: DELETE
+    URL:
+      root: '{apiRoot}/nudr-dr/v1'
+      path: /subscription-data/:ueId/context-data/smf-registrations/:pduSessionId
+  Caller:
+    NetworkFunction: UDM
+    FuncName: DeleteSmfContext
+  Callee:
+    NetworkFunction: UDR
+    FuncName: HTTPDeleteSmfContext
+  Scope: nudr-dr:udm
+- API:
+    HTTPType: PUT
+    URL:
+      root: '{apiRoot}/nudr-dr/v1'
+      path: /subscription-data/:ueId/context-data/smf-registrations/:pduSessionId
+  Caller:
+    NetworkFunction: UDM
+    FuncName: CreateSmfContextNon3gpp
+  Callee:
+    NetworkFunction: UDR
+    FuncName: HTTPCreateSmfContextNon3gpp
+  Scope: nudr-dr:udm
+- API:
+    HTTPType: GET
+    URL:
+      root: '{apiRoot}/nnrf-disc/v1'
+      path: /nf-instances
+  Caller:
+    NetworkFunction: UDR
+    FuncName: SearchNFInstances
+  Callee:
+    NetworkFunction: NRF
+    FuncName: HTTPSearchNFInstances
+  Scope: nnrf-disc
+- API:
+    HTTPType: PUT
+    URL:
+      root: '{apiRoot}/nnrf-nfm/v1'
+      path: /nf-instances/:nfInstanceID
+  Caller:
+    NetworkFunction: UDR
+    FuncName: RegisterNFInstance
+  Callee:
+    NetworkFunction: NRF
+    FuncName: HTTPRegisterNFInstance
+  Scope: nnrf-nfm
+- API:
+    HTTPType: DELETE
+    URL:
+      root: '{apiRoot}/nnrf-nfm/v1'
+      path: /nf-instances/:nfInstanceID
+  Caller:
+    NetworkFunction: UDR
+    FuncName: DeregisterNFInstance
+  Callee:
+    NetworkFunction: NRF
+    FuncName: HTTPDeregisterNFInstance
+  Scope: nnrf-nfm
