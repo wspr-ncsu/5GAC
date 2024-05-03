@@ -16,6 +16,11 @@ git clone --recursive https://github.com/wspr-ncsu/5GAC.git # --recursive is imp
 docker build  ./ -t 5gac:latest && docker run -v $(pwd):/repo 5gac:latest
 ```
 
+If you want to use podman instead of docker, use the following command to run the container:
+```bash
+podman build ./ --format=docker -t 5gac:latest && podman run -v $(pwd):/repo 5gac:latest
+```
+
 The analysis results will be added to the json folder in this directory. Each result file name is the 5G core that was analyzed followed by the date and time the analysis was run.
 
 If you want to run 5GAC without docker, we recommend running the commands one by one as they are listed in the Dockerfile. This handles cloning the repos and any packages needed to compile and run all of the 5G cores as well as analyze the output.

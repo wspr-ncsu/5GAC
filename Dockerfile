@@ -1,4 +1,4 @@
-from golang:1.22.2-bookworm
+from docker.io/golang:1.22.2-bookworm
 SHELL ["/bin/bash", "-c"]
 
 # Install necessary packages to build things. Download CodeQL
