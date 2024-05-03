@@ -53,7 +53,7 @@ func ParseJSON(file string) []AccessPattern {
 	data := codeQLAP{}
 	err = json.Unmarshal(doc, &data)
 	if err != nil {
-		log.Printf("First Err: %v, file: %v\n", err, file)
+		log.Printf("Err: %v, file: %v\n", err, file)
 
 		data := codeQLAP_OAI{}
 		err = json.Unmarshal(doc, &data)
