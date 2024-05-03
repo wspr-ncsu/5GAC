@@ -13,9 +13,18 @@ type (
 		SelectStmt Selected `json:"#select"`
 	}
 
+	codeQLAP_OAI struct {
+		SelectStmt Selected_OAI `json:"#select"`
+	}
+
 	Selected struct {
 		Columns []ColumnsType `json:"columns"`
 		Tuples  [][]string    `json:"tuples"`
+	}
+
+	Selected_OAI struct {
+		Columns []ColumnsType `json:"columns"`
+		Tuples  interface{}   `json:"tuples"`
 	}
 
 	ColumnsType struct {
@@ -43,9 +52,14 @@ func ParseJSON(file string) []AccessPattern {
 
 	data := codeQLAP{}
 	err = json.Unmarshal(doc, &data)
-
 	if err != nil {
-		log.Fatalf("Err: %v, file: %v\n", err, file)
+		log.Printf("First Err: %v, file: %v\n", err, file)
+
+		data := codeQLAP_OAI{}
+		err = json.Unmarshal(doc, &data)
+		if err != nil {
+			log.Printf("OAI Err: %v, file: %v\n", err, file)
+		}
 	}
 
 	accessPatterns = make([]AccessPattern, 0)
