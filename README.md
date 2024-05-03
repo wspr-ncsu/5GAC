@@ -6,7 +6,7 @@
 - Open5GS (Based on 3GPP Release 17)
 - OpenAirInterface (OAI)
 
-This repository contains the CodeQL files to analyze the cores. 5GAC is extensible in that there is a higher level model defined in the [x] folder and each implementation is defined in subfolders. This allows much of the analysis abstractions to be re-used across code bases.
+This repository contains the CodeQL files to analyze the cores. 5GAC is extensible in that there is a higher level model defined by the CodeQL module `CoreAPI` and each 5G core's subfolder includes the implementation. This allows much of the analysis abstractions to be re-used across code bases.
 
 ## Running 5GAC
 
