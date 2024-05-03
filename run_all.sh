@@ -10,23 +10,24 @@ run_ql(){
     echo $3
 
     codeql query run -j -2 \
-    -o ${REPO_LOC}/bqrs/$1.bqrs \
-    -d $2 \
-    --additional-packs=$HOME/codeql-home/codeql-repo \
-    --additional-packs=${REPO_LOC} \
-    $3
+    -o "${REPO_LOC}/bqrs/$1.bqrs" \
+    -d "$2" \
+    --additional-packs="$HOME/codeql-home/codeql-repo" \
+    --additional-packs="${REPO_LOC}" \
+    "$3"
 
     echo "Decoding query results to JSON."
 
 codeql bqrs decode --format=json \
     -o ${REPO_LOC}/json/$1.json \
     ${REPO_LOC}/bqrs/$1.bqrs
-   
+
     cd ${REPO_LOC}/gocode/Analyzer
     ./Analyzer -ap=${REPO_LOC}/json/$1.json
 
-    mv "${REPO_LOC}/gocode/_output/acp.yaml" "${REPO_LOC}/output/$1.yaml" 
-    cd ${REPO_LOC}    
+    mv "${REPO_LOC}/gocode/_output/acp.yaml" "${REPO_LOC}/output/$1.yaml"
+    chmod 777 "${REPO_LOC}/output/$1.yaml"
+    cd ${REPO_LOC}
 }
 
 cd ${REPO_LOC}/gocode/Analyzer
@@ -67,8 +68,3 @@ oai_name=oai_$DATE
 oai_db=${DB_LOC}/oai/cpp
 oai_query=OAI/service_access_discovery.ql
 run_ql $oai_name $oai_db $oai_query
-
-
-cd ${REPO_LOC}/gocode/Analyzer
-go build main.go -o Analyzer
-./Analyzer -ap=

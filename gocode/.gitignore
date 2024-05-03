@@ -20,8 +20,6 @@
 # Go workspace file
 go.work
 
-\_output/*
-
 *.png
 .history/
 output/
